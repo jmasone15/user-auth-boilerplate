@@ -4,7 +4,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const secretKey = "=7C#Kpt_7r^n8&jmrHh!!Y%AQ7jM#s7rHD^wh*&^LYn$-jTx6N"
 
-router.post("/", async (req, res) => {
+router.post("/signup", async (req, res) => {
     // If there is an error inside of the try block, it will move to the catch block and handle the error.
     try {
         const { email, password, passwordVerify } = req.body;
@@ -87,6 +87,18 @@ router.get("/logout", (req, res) => {
         httpOnly: true,
         expires: new Date(0)
     }).send();
+});
+
+router.get("/loggedIn", (req, res) => {
+    try {
+        const token = req.cookies.token;
+        if (!token)
+            return res.json(false);
+
+        res.send(true);
+    } catch (err) {
+        res.json(false);
+    }
 });
 
 module.exports = router;
