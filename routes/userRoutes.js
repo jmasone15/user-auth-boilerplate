@@ -37,7 +37,7 @@ router.post("/signup", async (req, res) => {
             user: savedUser._id
         }, secretKey);
         res.cookie("token", token, {
-            httpOnly: true,
+            httpOnly: false,
         }).send();
 
         // Use a password generator to get your own secret key for the JSON Web Token
@@ -72,7 +72,7 @@ router.post("/login", async (req, res) => {
             user: existingUser._id
         }, secretKey);
         res.cookie("token", token, {
-            httpOnly: true,
+            httpOnly: false,
         }).send();
 
     } catch (err) {
@@ -84,7 +84,7 @@ router.post("/login", async (req, res) => {
 // To log a user out, we delete the cookie that we set in the earlier routes.
 router.get("/logout", (req, res) => {
     res.cookie("token", "", {
-        httpOnly: true,
+        httpOnly: false,
         expires: new Date(0)
     }).send();
 });
@@ -100,5 +100,15 @@ router.get("/loggedIn", (req, res) => {
         res.json(false);
     }
 });
+
+router.get("/profile/:id", async (req, res) => {
+    try {
+        const userInfo = await User.findById(req.params.id);
+        res.json(userInfo);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send();
+    }
+})
 
 module.exports = router;
