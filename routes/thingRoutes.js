@@ -31,4 +31,29 @@ router.get("/", auth, async (req, res) => {
     }
 });
 
+router.put("/:id", auth, async (req, res) => {
+    try {
+
+        const updateThing = await Thing.findByIdAndUpdate(
+            req.params.id,
+            { name: req.body.name }
+        );
+        res.json(updateThing);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send();
+    }
+});
+
+router.delete("/:id", auth, async (req, res) => {
+    try {
+
+        const deleteThing = await Thing.findByIdAndDelete(req.params.id);
+        res.json(deleteThing);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send();
+    }
+});
+
 module.exports = router;
