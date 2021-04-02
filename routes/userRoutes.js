@@ -32,6 +32,7 @@ router.post("/signup", async (req, res) => {
         const savedUser = await newUser.save();
 
         // Log in the new user
+        // hide key
         // To log a user in, we put a jwt in the users cookie storage. This is how we determine if the user is allowed to visit our protected pages.
         const token = jwt.sign({
             user: savedUser._id
