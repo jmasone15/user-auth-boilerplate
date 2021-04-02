@@ -6,15 +6,14 @@ const morgan = require("morgan");
 
 const app = express();
 const PORT = process.env.PORT || 3001;
+// Starts the server.
+app.listen(PORT, () => console.log(`Running on port: ${PORT}🌎`));
 
 // Middleware
 // Runs functions for incoming requests for all paths or specific requests 
 app.use(express.json());
 app.use(cookieParser());
 app.use(morgan("tiny")); // logging framework
-
-// Starts the server.
-app.listen(PORT, () => console.log(`Running on port: ${PORT}🌎`));
 
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
@@ -36,6 +35,7 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/mernUserAuth", 
 // Routes
 app.use("/auth", require("./routes/userRoutes"));
 app.use("/thing", require("./routes/thingRoutes"));
+
 // Only use for heroku
 app.get("*", function (req, res) {
     res.sendFile(path.join(__dirname, "./client/build/index.html"));
