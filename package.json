@@ -22,7 +22,6 @@
   "bugs": {
     "url": "https://github.com/jmasone15/user-auth-boilerplate/issues"
   },
-  "homepage": "https://github.com/jmasone15/user-auth-boilerplate#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "concurrently": "^6.0.0",
