@@ -14,6 +14,8 @@ app.use(cookieParser());
 // Make sure to put the db name here.
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/mernUserAuth", {
     useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
     useFindAndModify: false
 }, (err) => {
     if (err) throw err;
