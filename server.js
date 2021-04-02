@@ -10,6 +10,9 @@ const PORT = process.env.PORT || 3001;
 app.use(express.json());
 app.use(cookieParser());
 
+// Starts the server.
+app.listen(PORT, () => console.log(`Running on port: ${PORT}🌎`));
+
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
     app.use(express.static("client/build"));
@@ -34,7 +37,3 @@ app.use("/thing", require("./routes/thingRoutes"));
 app.get("*", function (req, res) {
     res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
-
-
-// Starts the server.
-app.listen(PORT, () => console.log(`Running on port: ${PORT}🌎`));
