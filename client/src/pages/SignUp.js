@@ -8,6 +8,7 @@ export default function SignUp() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [passVerify, setPassVerify] = useState("");
+    const [view, setView] = useState("password");
 
     const { getLoggedIn } = useContext(AuthContext);
     const history = useHistory();
@@ -27,6 +28,16 @@ export default function SignUp() {
             history.push("/home");
         } catch (err) {
             console.error(err);
+            alert(err.request.response);
+        }
+    }
+
+    function passView(e) {
+        e.preventDefault();
+        if (view === "password") {
+            setView("text");
+        } else {
+            setView("password")
         }
     }
 
@@ -34,11 +45,12 @@ export default function SignUp() {
         <div>
             <h1>Sign Up for our website!</h1>
             <form onSubmit={signUp}>
-                <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                <input type="email" placeholder="Email" required value={email} onChange={(e) => setEmail(e.target.value)} />
                 <br /><br />
-                <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                <input type={view} placeholder="Password" required value={password} onChange={(e) => setPassword(e.target.value)} />
+                <button onClick={(e) => passView(e)}>View</button>
                 <br /><br />
-                <input type="password" placeholder="Verify Password" value={passVerify} onChange={(e) => setPassVerify(e.target.value)} />
+                <input type={view} placeholder="Verify Password" required value={passVerify} onChange={(e) => setPassVerify(e.target.value)} />
                 <br /><br />
                 <button type="submit">Sign Up</button>
             </form>

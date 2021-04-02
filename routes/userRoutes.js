@@ -11,16 +11,16 @@ router.post("/signup", async (req, res) => {
 
         // Validation
         if (!email || !password || !passwordVerify)
-            return res.status(400).json({ errorMessage: "Please fill out all of the fields." });
+            return res.status(400).send("Please fill out all of the fields.");
         if (password.length < 6)
-            return res.status(400).json({ errorMessage: "Please enter a password that is at least 6 characters long." });
+            return res.status(400).send("Please enter a password that is at least 6 characters long.");
         if (password !== passwordVerify)
-            return res.status(400).json({ errorMessage: "Please enter the same password twice." });
+            return res.status(400).send("Please enter the same password twice.");
 
         // Ensure only unique emails
         const existingUser = await User.findOne({ email });
         if (existingUser)
-            return res.status(400).json({ errorMessage: "An account with this email already exists." });
+            return res.status(400).send("An account with this email already exists.");
 
         // Hash the password
         // We don't want to save the password in the database, so we encrypt it so that the databse never knows the exact password of the users.
@@ -57,16 +57,16 @@ router.post("/login", async (req, res) => {
 
         // Validation
         if (!email || !password)
-            return res.status(400).json({ errorMessage: "Please fill out all of the fields." });
+            return res.status(400).send("Please enter all required fields");
         const existingUser = await User.findOne({ email });
         if (!existingUser)
-            return res.status(401).json({ errorMessage: "Wrong email or password." });
+            return res.status(401).send("Wrong email or password.");
 
         // Bcrypt will compare the password the user entered with the password Hash saved in the db.
         // If the password and passwordHash are linked to the same origin, bcrypt returns true, otherwise it returns false.
         const passwordCorrect = await bcrypt.compare(password, existingUser.passwordHash);
         if (!passwordCorrect)
-            return res.status(401).json({ errorMessage: "Wrong email or password." });
+            return res.status(401).send("Wrong email or password.");
 
         // Log in the new user
         const token = jwt.sign({

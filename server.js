@@ -37,6 +37,6 @@ app.use("/auth", require("./routes/userRoutes"));
 app.use("/thing", require("./routes/thingRoutes"));
 
 // Only use for heroku
-app.get("*", function (req, res) {
-    res.sendFile(path.join(__dirname, "./client/build/index.html"));
-});
+// app.get("*", function (req, res) {
+//     res.sendFile(path.join(__dirname, "./client/build/index.html"));
+// });
