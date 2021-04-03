@@ -13,8 +13,6 @@ export default function Router() {
 
     return (
         <BrowserRouter>
-            <Navbar />
-            <br />
             <Switch>
                 {loggedIn === false && (
                     <>
