@@ -17,6 +17,7 @@ import AuthContext from '../context/AuthContext';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 
+
 function Copyright() {
     return (
         <Typography variant="body2" color="textSecondary" align="center">
@@ -97,6 +98,12 @@ export default function Login() {
         }
     }
 
+    async function handleClick(e, page) {
+        e.preventDefault();
+
+        history.push(page);
+    }
+
     return (
         <Grid container component="main" className={classes.root}>
             <CssBaseline />
@@ -163,7 +170,7 @@ export default function Login() {
                                 </Link>
                             </Grid>
                             <Grid item>
-                                <Link href="/signup" variant="body2">
+                                <Link href="#" onClick={(e) => handleClick(e, "/signup")} variant="body2">
                                     {"Don't have an account? Sign Up"}
                                 </Link>
                             </Grid>

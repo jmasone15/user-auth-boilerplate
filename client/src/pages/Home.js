@@ -15,6 +15,7 @@ const useStyles = makeStyles((theme) => ({
             theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
         backgroundSize: 'cover',
         backgroundPosition: 'center',
+        width: "100%"
     },
     root: {
         height: '100vh',
@@ -27,17 +28,18 @@ export default function Home() {
     const classes = useStyles();
 
     return (
-        <Grid container component="main" className={classes.root}>
+        <Grid container fluid component="main" className={classes.root}>
             <CssBaseline />
-            <Grid container className={classes.image} justify="center">
-                <Grid item xs={12}>
+            <Grid item className={classes.image}>
+                <Grid item>
                     <Navbar />
                 </Grid>
-                <Grid item xs={5} component={Paper} elevation={3} >
-                    <div style={{ textAlign: "center" }}>
+                <Grid item sm={4} style={{ padding: "25px" }}>
+                    <Paper elevation={3} style={{ textAlign: "center" }}>
                         <h1>Home Page</h1>
-                        <h4>Welcome {userEmail}</h4>
-                    </div>
+                        <h3>Welcome {userEmail}</h3>
+                        <br />
+                    </Paper>
                 </Grid>
             </Grid>
         </Grid >

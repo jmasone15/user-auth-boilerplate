@@ -1,5 +1,11 @@
 import axios from 'axios';
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import TextField from '@material-ui/core/TextField';
+
 
 export default function ThingsForm({ getThings }) {
 
@@ -23,14 +29,16 @@ export default function ThingsForm({ getThings }) {
     }
 
     return (
-        <div>
-            <form onSubmit={saveThing}>
-                <label>Enter a thing:    </label>
-                <input type="text" placeholder="Thing" value={thingName} onChange={(e) => setThingName(e.target.value)} />
-                <br /><br />
-                <button type="submit">Add to your things</button>
-            </form>
-            <br />
-        </div>
+        <Grid container justify="center">
+            <CssBaseline />
+            <Paper evelation={3} style={{ padding: "25px", textAlign: "center" }}>
+                <h1>Add A Thing!</h1>
+                <form onSubmit={saveThing}>
+                    <TextField label="Enter Thing" variant="outlined" value={thingName} onChange={(e) => setThingName(e.target.value)} />
+                    <br /><br />
+                    <Button type="submit" variant="outlined" color="primary">Add to your things</Button>
+                </form>
+            </Paper>
+        </Grid>
     )
 }
